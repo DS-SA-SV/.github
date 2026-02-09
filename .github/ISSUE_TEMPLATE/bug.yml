@@ -1,0 +1,155 @@
+name: "Bug"
+description: "Fehlverhalten / Defect: Ist-Zustand weicht von Soll ab"
+title: "BUG-"
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Bitte so konkret wie möglich. Ideal: **Steps to Reproduce** + **Expected vs Actual** + **Evidence**.
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Schweregrad
+      options:
+        - S1 – Kritisch (System down / Datenverlust / Security)
+        - S2 – Hoch (Funktion stark beeinträchtigt, kein Workaround)
+        - S3 – Mittel (Workaround vorhanden)
+        - S4 – Niedrig (Kosmetik / geringe Auswirkung)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Bereich
+      options:
+        - Pipeline / ETL / Parsing
+        - Datenqualität / Validierung
+        - Datenmodell / Schema / DB
+        - App / UI (z.B. Shiny)
+        - Berechtigungen / Zugriff
+        - Betrieb / Deployment / Jobs
+        - Monitoring / Alerting
+        - Dokumentation
+        - Sonstiges
+    validations:
+      required: true
+
+  - type: dropdown
+    id: reproducibility
+    attributes:
+      label: Reproduzierbarkeit
+      options:
+        - Immer (100%)
+        - Häufig (>50%)
+        - Manchmal (<50%)
+        - Einmalig / unklar
+    validations:
+      required: true
+
+  - type: dropdown
+    id: data_risk
+    attributes:
+      label: Daten-/Compliance-Risiko
+      options:
+        - Kein spezieller Bezug
+        - Personendaten / Datenschutz
+        - Informationssicherheit
+        - Revisions-/Audit-Relevanz
+        - Finanz-/Leistungsrelevanz
+    validations:
+      required: true
+
+  - type: input
+    id: owner
+    attributes:
+      label: Owner (@GitHub-Handle)
+      placeholder: "@username"
+    validations:
+      required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Kurzbeschreibung
+      description: "Was ist kaputt? (1–2 Sätze)"
+      placeholder: "Beim ... passiert ..., obwohl ..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Erwartetes Verhalten
+      placeholder: "Soll: ..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Tatsächliches Verhalten
+      placeholder: "Ist: ..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Schritte zur Reproduktion
+      description: "So detailliert, dass jemand anderes den Bug nachstellen kann."
+      placeholder: |
+        1) ...
+        2) ...
+        3) ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Umgebung / Kontext
+      description: "z.B. env (dev/test/prod), Branch, Datenstand/Monat, OS, Versionen, Job-Run"
+      placeholder: |
+        env:
+        branch/commit:
+        datenstand:
+        system:
+        versionen:
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidenz / Logs / Screenshots
+      description: "Links oder Snippets (z.B. Run-Log, Error-Trace, Screenshot, Datei-Pfad im Repo)."
+      placeholder: "z.B. Link zur Action/PR, Log-Auszug, Screenshot"
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact / Scope
+      description: "Wie viele Fälle/Datensätze/Users betroffen? Seit wann?"
+      placeholder: "Betroffen: ... / Seit: ... / Workaround: ..."
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: gate
+    attributes:
+      label: Quality Gate (Fix)
+      description: "Was muss vor Merge/Release erfüllt sein?"
+      options:
+        - label: Repro-Schritte dokumentiert und nachvollziehbar
+          required: true
+        - label: Fix durch Test/Check abgesichert (Unit/Integration/Smoke)
+          required: true
+        - label: Backward-Compatibility / Datenmigration geprüft (falls Schema/Parser)
+          required: false
+        - label: Security/Compliance geprüft (falls relevant)
+          required: false
