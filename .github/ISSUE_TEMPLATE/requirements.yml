@@ -1,0 +1,115 @@
+name: "Requirement"
+description: "Functional, Data Rules, Non-functional, Security/Compliance, Operations"
+title: "REQ-"
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Bitte fülle das Requirement möglichst **lösungsneutral** aus.
+        Tipp: Akzeptanzkriterien am besten **messbar** (Given/When/Then oder Schwellenwerte).
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Kategorie
+      options:
+        - "FR – Funktional"
+        - "DR – Datenregeln / Fachlogik"
+        - "NFR – Nicht-funktional"
+        - "SR – Security / Compliance"
+        - "BR – Betrieb"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: subtype
+    attributes:
+      label: Untertyp (optional, hilft bei Auswertung)
+      options:
+        - "Transformation / Parsing"
+        - "Validierung / Plausibilität"
+        - "Datenmodell / Schema"
+        - "Performance / Laufzeit"
+        - "Verfügbarkeit / Wiederanlauf"
+        - "Zugriff / Rollen / Berechtigungen"
+        - "Protokollierung / Audit"
+        - "Monitoring / Alarmierung"
+        - "Backup / Restore"
+        - "Dokumentation / Runbook"
+        - "Sonstiges"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: compliance
+    attributes:
+      label: Risiko/Compliance-Bezug
+      options:
+        - "Kein spezieller Bezug"
+        - "Datenschutz / Personendaten"
+        - "Informationssicherheit"
+        - "Revisions-/Audit-Relevanz"
+        - "Betriebskritisch / Verfügbarkeit"
+    validations:
+      required: true
+
+  - type: input
+    id: owner
+    attributes:
+      label: Owner (@GitHub-Handle)
+      placeholder: "@username"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Beschreibung
+      description: "Was soll das System leisten? Formuliere möglichst lösungsneutral."
+      placeholder: "Das System muss ..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Akzeptanzkriterien (messbar)
+      description: "Messbar/pruefbar formulieren (z.B. Given/When/Then oder klare Schwellenwerte)."
+      placeholder: |
+        Given ...
+        When ...
+        Then ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: test_evidence
+    attributes:
+      label: Testnachweis (wie wird es geprüft?)
+      description: "Link/Artefakt: Log, Screenshot, Testprotokoll, PR-Checks, Datei im Repo."
+      placeholder: "z.B. Link zur PR + Run-Log, Screenshot, Testreport"
+    validations:
+      required: true
+
+  - type: input
+    id: slo
+    attributes:
+      label: SLO / Zielwert (optional)
+      description: "Falls relevant: z.B. End-to-End Laufzeit ≤ 90 Min, Erfolgsrate ≥ 99%."
+      placeholder: "z.B. End-to-End Laufzeit ≤ 90 Min"
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: gate
+    attributes:
+      label: Quality Gate (bei Änderungen)
+      description: "Was muss vor Release erfüllt sein?"
+      options:
+        - label: "Akzeptanzkriterien sind testbar und dokumentiert"
+          required: true
+        - label: "Betroffene Parser-/Datenmodelländerungen sind dokumentiert"
+          required: false
+        - label: "Security/Compliance geprüft (falls SR oder Datenschutzbezug)"
+          required: false
