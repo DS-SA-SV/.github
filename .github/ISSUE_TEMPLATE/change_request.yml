@@ -1,0 +1,61 @@
+name: "Change Request"
+description: "Änderungsantrag (Standard/Normal/Emergency) mit Impact, Testplan und Rollback"
+title: "CHG-"
+labels: ["change"]
+body:
+  - type: dropdown
+    id: change_type
+    attributes:
+      label: Change-Typ
+      options:
+        - Standard (wiederkehrend, geringes Risiko)
+        - Normal (geplant, Bewertung + Tests)
+        - Emergency (dringend, Mindestkontrollen)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Komponente
+      options:
+        - Parsing / Mapping
+        - Datenmodell / Schema
+        - SQL / Persistierung
+        - Konfiguration / ENV
+        - Betrieb / Monitoring / Logging
+        - Security / Zugriff / Secrets
+        - Dokumentation / Runbook
+    validations:
+      required: true
+
+  - type: dropdown
+    id: risk
+    attributes:
+      label: Risiko
+      options: [Low, Medium, High]
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact / Scope
+      description: "Betroffene Artefakte + Auswirkungen auf Output und historische Vergleichbarkeit."
+    validations:
+      required: true
+
+  - type: textarea
+    id: testplan
+    attributes:
+      label: Testumfang / Evidenz
+      description: "Unit/Integration/Regression/DQ/Performance/Security + Links zu Actions/Logs"
+    validations:
+      required: true
+
+  - type: textarea
+    id: rollback
+    attributes:
+      label: Rollback-Plan
+    validations:
+      required: true
